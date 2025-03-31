@@ -70,7 +70,6 @@
 
     <association property="grupe" column="grupe_id" javaType="com.example.mywebapp.mybatis.model.Grupe" />
   </resultMap>
-
   <select id="selectStudentsByGroupId" resultMap="studentResultMap">
     SELECT id, vardas, pavarde, grupe_id
     FROM STUDENTAS
