@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<h:body>
+    <h2>Grupes:</h2>
+    <ol>
+        <ui:repeat value="#{grupes.grupes}" var="grupe">
+            <li>
+                <h:link value="#{grupe.specialybe} #{grupe.kursas}" outcome="studentai?grupeId=#{grupe.id}"/>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:outputLabel value="Specialybe: "/>
+        <h:inputText value="#{grupes.grupe.specialybe}" required="true"/><br/>
+        <h:outputLabel value="Kursas: "/>
+        <h:inputText value="#{grupes.grupe.kursas}" required="true"/><br/><br/>
+        <h:commandButton value="Prideti nauja grupe" actionListener="#{grupes.createGrupe()}" action="index?faces-redirect=true"/>
+    </h:form>
+    <h:link outcome="myBatis/grupes" value="MyBatis implementacija"/>
+</h:body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<h:body>
+    <h2>#{pasirenkamiKursaiMyBatis.studentas.vardas} #{pasirenkamiKursaiMyBatis.studentas.pavarde} pasirinkti kursai</h2>
+    <ol>
+        <ui:repeat value="#{pasirenkamiKursaiMyBatis.studentas.pasirenkamiKursai}" var="kursas">
+            <li>
+                #{kursas.pavadinimas}
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:outputLabel value="Pasirinkite kursa: "/>
+        <h:selectOneMenu value="#{pasirenkamiKursaiMyBatis.selectedCourseId}">
+            <f:selectItems value="#{pasirenkamiKursaiMyBatis.availableCourses}" var="kursas" itemLabel="#{kursas.pavadinimas}" itemValue="#{kursas.id}" />
+        </h:selectOneMenu>
+        <h:commandButton value="Prideti kursa"
+                         actionListener="#{pasirenkamiKursaiMyBatis.addCourseToStudent}"
+                         action="#{'pasirinktiKursai?faces-redirect=true&amp;studentasId='.concat(pasirenkamiKursaiMyBatis.studentas.id)}">
+            <f:param name="studentasId" value="#{pasirenkamiKursaiMyBatis.studentas.id}"/>
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:outputLabel value="Naujo kurso pavadinimas: "/>
+        <h:inputText value="#{pasirenkamiKursaiMyBatis.newCourse.pavadinimas}" required="true" />
+        <h:commandButton value="Sukurti nauja kursa"
+                         actionListener="#{pasirenkamiKursaiMyBatis.createCourse}"
+                         action="#{'pasirinktiKursai?faces-redirect=true&amp;studentasId='.concat(pasirenkamiKursaiMyBatis.studentas.id)}">
+            <f:param name="studentasId" value="#{pasirenkamiKursaiMyBatis.studentas.id}"/>
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="studentai?grupeId=#{pasirenkamiKursaiMyBatis.studentas.grupeId}" value="Atgal i studentu saraso puslapi"/>
+</h:body>
+</html>
